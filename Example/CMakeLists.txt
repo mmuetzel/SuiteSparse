@@ -309,14 +309,14 @@ else ( )
 endif ( )
 
 # GraphBLAS:
-target_link_libraries ( my PRIVATE graphblas )
-target_link_libraries ( my_cxx PRIVATE graphblas )
-if ( TARGET graphblas_static )
-    target_link_libraries ( my_static PUBLIC graphblas_static )
-    target_link_libraries ( my_cxx_static PUBLIC graphblas_static )
+target_link_libraries ( my PRIVATE SuiteSparse::graphblas )
+target_link_libraries ( my_cxx PRIVATE SuiteSparse::graphblas )
+if ( TARGET SuiteSparse::graphblas_static )
+    target_link_libraries ( my_static PUBLIC SuiteSparse::graphblas_static )
+    target_link_libraries ( my_cxx_static PUBLIC SuiteSparse::graphblas_static )
 else ( )
-    target_link_libraries ( my_static PUBLIC graphblas )
-    target_link_libraries ( my_cxx_static PUBLIC graphblas )
+    target_link_libraries ( my_static PUBLIC SuiteSparse::graphblas )
+    target_link_libraries ( my_cxx_static PUBLIC SuiteSparse::graphblas )
 endif ( )
 
 # klu:
