@@ -388,6 +388,7 @@ if ( BUILD_TESTING )
     else ( )
         target_link_libraries ( mongoose_unit_test_io Mongoose_static )
     endif ( )
+    target_link_libraries ( mongoose_unit_test_io SuiteSparse::SuiteSparseConfig )
     set_target_properties ( mongoose_unit_test_io PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${TESTING_OUTPUT_PATH} )
     add_test ( NAME Mongoose_Unit_Test_IO
         COMMAND ${TESTING_OUTPUT_PATH}/mongoose_unit_test_io
