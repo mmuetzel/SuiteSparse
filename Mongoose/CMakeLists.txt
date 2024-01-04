@@ -383,7 +383,11 @@ if ( BUILD_TESTING )
     # Unit Tests
     add_executable ( mongoose_unit_test_io
         Tests/Mongoose_UnitTest_IO_exe.cpp )
-    target_link_libraries ( mongoose_unit_test_io Mongoose_static )
+    if ( BUILD_SHARED_LIBS )
+        target_link_libraries ( mongoose_unit_test_io Mongoose )
+    else ( )
+        target_link_libraries ( mongoose_unit_test_io Mongoose_static )
+    endif ( )
     set_target_properties ( mongoose_unit_test_io PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${TESTING_OUTPUT_PATH} )
     add_test ( NAME Mongoose_Unit_Test_IO
         COMMAND ${TESTING_OUTPUT_PATH}/mongoose_unit_test_io
