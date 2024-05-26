@@ -84,7 +84,8 @@ jobs:
 
       - name: debug
         if: always()
-        run: cat /etc/apk/repositories
+        shell: bash
+        run: cat /home/runner/rootfs/alpine-latest-${{ matrix.arch }}/etc/apk/repositories
 
       - name: get CPU information (emulated)
         run: lscpu
