@@ -82,6 +82,10 @@ jobs:
             automake
             libtool
 
+      - name: debug
+        if: always()
+        run: cat /etc/apk/repositories
+
       - name: get CPU information (emulated)
         run: lscpu
 
