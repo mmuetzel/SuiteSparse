@@ -35,6 +35,8 @@
 #ifndef AMD_H
 #define AMD_H
 
+#include <stdint.h>
+
 #include "SuiteSparse_config.h"
 
 /* make it easy for C++ programs to include AMD */
