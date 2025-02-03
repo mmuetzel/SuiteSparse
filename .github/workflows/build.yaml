@@ -33,14 +33,13 @@ jobs:
 
       matrix:
         compiler: [gcc, clang]
-        cuda: [with]
         link: [both]
         include:
           - compiler: gcc
             cuda: with
             openmp: with
           - compiler: clang
-            cuda: with
+            cuda: without
             openmp: without
           - compiler: gcc
             cuda: without
