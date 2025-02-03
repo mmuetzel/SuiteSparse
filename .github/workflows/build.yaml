@@ -34,21 +34,20 @@ jobs:
       matrix:
         compiler: [gcc, clang]
         cuda: [with, without]
-        openmp: [with]
         link: [both]
         include:
           - compiler: gcc
             compiler-pkgs: "g++ gcc"
             cc: "gcc"
             cxx: "g++"
+            openmp: with
+            ccache-max: 600M
           - compiler: clang
             compiler-pkgs: "clang libomp-dev"
             cc: "clang"
             cxx: "clang++"
-          # Clang seems to generally require less cache size (smaller object files?).
-          - compiler: gcc
-            ccache-max: 600M
-          - compiler: clang
+            openmp: without
+            # Clang seems to generally require less cache size (smaller object files?).
             ccache-max: 500M
           - cuda: with
             cuda-pkgs: "nvidia-cuda-dev nvidia-cuda-toolkit"
