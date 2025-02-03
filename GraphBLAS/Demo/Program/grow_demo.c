@@ -19,8 +19,8 @@
 #include "import_test.c"
 #include "read_matrix.c"
 
-#include "omp.h"
 #if defined ( _OPENMP )
+#include <omp.h>
 #define WALLCLOCK omp_get_wtime ( )
 #else
 #define WALLCLOCK 0

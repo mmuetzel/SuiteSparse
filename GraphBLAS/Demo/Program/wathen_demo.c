@@ -16,7 +16,7 @@
 #include "simple_rand.c"
 #include "wathen.c"
 #ifdef _OPENMP
-#include "omp.h"
+#include <omp.h>
 #endif
 
 // macro used by OK(...) to free workspace if an error occurs
