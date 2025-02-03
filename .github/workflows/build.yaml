@@ -33,7 +33,7 @@ jobs:
 
       matrix:
         compiler: [gcc, clang]
-        cuda: [with, without]
+        cuda: [with]
         link: [both]
         include:
           - compiler: gcc
@@ -103,7 +103,7 @@ jobs:
           sudo apt -qq update
           sudo apt install -y ${COMPILER_PKGS} autoconf automake ccache cmake \
             dvipng gfortran libgmp-dev liblapack-dev libmpfr-dev valgrind \
-            libopenblas-dev ${CUDA_PKGS}
+            libblas-dev ${CUDA_PKGS}
 
       - name: prepare ccache
         # create key with human readable timestamp
@@ -160,7 +160,7 @@ jobs:
                   -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
                   -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
                   -DCMAKE_Fortran_COMPILER_LAUNCHER="ccache" \
-                  -DBLA_VENDOR="OpenBLAS" \
+                  -DBLA_VENDOR="Generic" \
                   -DSUITESPARSE_DEMOS=OFF \
                   -DBUILD_TESTING=OFF \
                   ${{ matrix.cuda-cmake-flags }} \
