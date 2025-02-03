@@ -76,7 +76,7 @@ jobs:
             ${{ matrix.compiler == 'clang' &&  matrix.openmp == 'with' && 'libomp' || '' }} \
             autoconf automake ccache cmake \
             dvipng gfortran libgmp-dev liblapack-dev libmpfr-dev valgrind \
-            libblas-dev \
+            libopenblas-dev \
             ${{ matrix.cuda == 'with' && 'nvidia-cuda-dev nvidia-cuda-toolkit' || '' }}
 
       - name: prepare ccache
@@ -130,12 +130,12 @@ jobs:
             printf "   \033[0;32m==>\033[0m Building library \033[0;32m${lib}\033[0m\n"
             echo "::group::Configure $lib"
             cd ${GITHUB_WORKSPACE}/${lib}/build
-            cmake -DCMAKE_BUILD_TYPE="Release" \
+            cmake -DCMAKE_BUILD_TYPE=${{ matrix.compiler == 'clang' && 'Debug' || 'Release' }} \
                   -DCMAKE_INSTALL_PREFIX="${GITHUB_WORKSPACE}" \
                   -DCMAKE_C_COMPILER_LAUNCHER="ccache" \
                   -DCMAKE_CXX_COMPILER_LAUNCHER="ccache" \
                   -DCMAKE_Fortran_COMPILER_LAUNCHER="ccache" \
-                  -DBLA_VENDOR="Generic" \
+                  -DBLA_VENDOR="OpenBLAS" \
                   -DSUITESPARSE_DEMOS=OFF \
                   -DBUILD_TESTING=OFF \
                   ${{ matrix.cuda == 'with'
