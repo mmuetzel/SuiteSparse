@@ -63,7 +63,6 @@ jobs:
             ccache-max: 600M
             cuda: without
             openmp: without
-            openmp-cmake-flags: "-DSUITESPARSE_USE_OPENMP=OFF"
           - compiler: gcc
             compiler-pkgs: "g++ gcc"
             cc: "gcc"
@@ -101,7 +100,10 @@ jobs:
           CUDA_PKGS: ${{ matrix.cuda-pkgs }}
         run: |
           sudo apt -qq update
-          sudo apt install -y ${COMPILER_PKGS} autoconf automake ccache cmake \
+          sudo apt install -y \
+            ${{ matrix.compiler == 'gcc' && 'g++ gcc' || 'clang' }} \
+            ${{ matrix.compiler == 'clang' &&  matrix.openmp == 'with' && 'libomp' || '' }} \
+            autoconf automake ccache cmake \
             dvipng gfortran libgmp-dev liblapack-dev libmpfr-dev valgrind \
             libblas-dev ${CUDA_PKGS}
 
@@ -164,7 +166,7 @@ jobs:
                   -DSUITESPARSE_DEMOS=OFF \
                   -DBUILD_TESTING=OFF \
                   ${{ matrix.cuda-cmake-flags }} \
-                  ${{ matrix.openmp-cmake-flags }} \
+                  ${{ matrix.openmp == 'with' && '' || '-DSUITESPARSE_USE_OPENMP=OFF' }} \
                   ${{ matrix.link-cmake-flags }} \
                   ..
             echo "::endgroup::"
