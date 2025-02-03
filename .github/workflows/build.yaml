@@ -32,18 +32,23 @@ jobs:
       fail-fast: false
 
       matrix:
-        compiler: [gcc, clang]
+        compiler: [gcc]
+        cuda: [with]
+        openmp: [with]
         link: [both]
         include:
           - compiler: gcc
             cuda: with
             openmp: with
-          - compiler: clang
-            cuda: without
-            openmp: without
+            link: both
           - compiler: gcc
             cuda: without
             openmp: without
+            link: both
+          - compiler: clang
+            cuda: without
+            openmp: without
+            link: both
           - compiler: gcc
             cuda: with
             openmp: with
