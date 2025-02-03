@@ -66,7 +66,7 @@ jobs:
           sudo apt -qq update
           sudo apt install -y \
             ${{ matrix.compiler == 'gcc' && 'g++ gcc' || 'clang' }} \
-            ${{ matrix.compiler == 'clang' &&  matrix.openmp == 'with' && 'libomp' || '' }} \
+            ${{ matrix.compiler == 'clang' && 'libomp' || '' }} \
             autoconf automake ccache cmake \
             dvipng gfortran libgmp-dev liblapack-dev libmpfr-dev \
             libopenblas-dev \
