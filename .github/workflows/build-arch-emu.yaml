@@ -36,7 +36,7 @@ jobs:
       matrix:
         # For available CPU architectures, see:
         # https://github.com/marketplace/actions/setup-alpine-linux-environment
-        arch: [x86, armv7, loongarch64]
+        arch: [x86, armv7, loongarch64, ppc64le]
         include:
           - arch: x86
             ccache-max: 64M
@@ -44,6 +44,10 @@ jobs:
             extra-check-libs: ":GraphBLAS:LAGraph"
           - arch: armv7
             ccache-max: 60M
+            extra-build-libs: ":GraphBLAS:LAGraph"
+            extra-check-libs: ":GraphBLAS:LAGraph"
+          - arch: ppc64le
+            ccache-max: 64M
             extra-build-libs: ":GraphBLAS:LAGraph"
             extra-check-libs: ":GraphBLAS:LAGraph"
           - arch: loongarch64
@@ -155,7 +159,7 @@ jobs:
           done
 
       - name: check
-        timeout-minutes: 60
+        timeout-minutes: 240
         run: |
           IFS=':'
           CHECK_LIBS="${CHECK_LIBS}${{ matrix.extra-check-libs }}"
